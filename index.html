@@ -10,6 +10,10 @@
             margin: 0px;
         }
 
+        body::-webkit-scrollbar{
+          display: none;
+        }
+
         canvas {
             width: 100%;
             height: 100%;
@@ -18,6 +22,7 @@
         .footer{
           margin-top: 50px;
           padding: 8px;
+          font-size: 18rpx;
           bottom: 0;
           width: 100%;
           background-color:rgb(33, 37, 41, 0.95);
@@ -134,7 +139,6 @@
 <body>
 
     <header>
-
       <div class="px-3 py-2 bg-dark text-white">
         <div class="container">
           <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
@@ -146,7 +150,7 @@
   
             <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
               <li>
-                <a href="#" class="nav-link text-white">
+                <a href="main.html" class="nav-link text-white">
                   <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-house" viewBox="0 0 16 16">
                     <path fill-rule="evenodd" d="M2 13.5V7h1v6.5a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5V7h1v6.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5zm11-11V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z"/>
                     <path fill-rule="evenodd" d="M7.293 1.5a1 1 0 0 1 1.414 0l6.647 6.646a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708L7.293 1.5z"/>
@@ -155,20 +159,12 @@
                 </a>
               </li>
               <li>
-                <a href="#" class="nav-link text-white">
+                <a href="showcase.html" class="nav-link text-white">
 					<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-badge-3d" viewBox="0 0 16 16">
 					  <path d="M4.52 8.368h.664c.646 0 1.055.378 1.06.9.008.537-.427.919-1.086.919-.598-.004-1.037-.325-1.068-.756H3c.03.914.791 1.688 2.153 1.688 1.24 0 2.285-.66 2.272-1.798-.013-.953-.747-1.38-1.292-1.432v-.062c.44-.07 1.125-.527 1.108-1.375-.013-.906-.8-1.57-2.053-1.565-1.31.005-2.043.734-2.074 1.67h1.103c.022-.391.383-.751.936-.751.532 0 .928.33.928.813.004.479-.383.835-.928.835h-.632v.914zm3.606-3.367V11h2.189C12.125 11 13 9.893 13 7.985c0-1.894-.861-2.984-2.685-2.984H8.126zm1.187.967h.844c1.112 0 1.621.686 1.621 2.04 0 1.353-.505 2.02-1.621 2.02h-.844v-4.06z"/>
 					  <path d="M14 3a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h12zM2 2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H2z"/>
 					</svg>
                   Showcase
-                </a>
-              </li>
-              <li>
-                <a href="#" class="nav-link text-white">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-cart3" viewBox="0 0 16 16">
-                    <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
-                  </svg>
-                  Ordini
                 </a>
               </li>
             </ul>
@@ -177,103 +173,26 @@
       </div>
     </header>
 
-    <div id="intro" class="position-relative overflow-hidden p-3 p-md-3 m-md-10 text-center bg-light">
-        <div id="introcontent">
-            <div class="col-md-5 p-lg-5 mx-auto my-5">
-            <h1 class="display-4 font-weight-normal">Beviamo.</h1>
-            <p class="lead font-weight-normal">E per questo è importante che i bicchieri non manchino.</p>
-            <a class="btn btn-outline-secondary" href="#">Dai un'occhiata</a>
-            </div>
-            <div class="product-device shadow-sm d-none d-md-block"></div>
-            <div class="product-device product-device-2 shadow-sm d-none d-md-block"></div>
-        </div>
-    </div>
+    <div id="content"> </div>
 
-    <div class="container marketing">
-
-        <!-- Three columns -->
-        <div class="row mb-3 mt-5">
-          <div class="col-lg-3 text-center">
-            <img class="rounded-circle" src="./images/glass.jpeg" alt="Generic placeholder image" width="140" height="140">
-            <h2 class>Vetro</h2>
-            <!--<p></p>-->
-            <p><a class="btn btn-secondary" href="#" role="button">Esplora »</a></p>
-          </div><!-- /.col-lg-4 -->
-          <div class="col-lg-3 text-center">
-            <img class="rounded-circle" src="./images/plastic.jpeg" alt="Generic placeholder image" width="140" height="140">
-            <h2>Plastica</h2>
-            <p><a class="btn btn-secondary" href="#" role="button">Esplora »</a></p>
-          </div><!-- /.col-lg-4 -->
-          <div class="col-lg-3 text-center">
-            <img class="rounded-circle" src="./images/wooden.jpeg" alt="Generic placeholder image" width="140" height="140">
-            <h2>Legno</h2>
-            <p><a class="btn btn-secondary" href="#" role="button">Esplora »</a></p>
-          </div><!-- /.col-lg-4 -->
-          <div class="col-lg-3 text-center">
-            <img class="rounded-circle" src="./images/iron.jpeg" alt="Generic placeholder image" width="140" height="140">
-            <h2>Acciaio</h2>
-            <p><a class="btn btn-secondary" href="#" role="button">Esplora »</a></p>
-          </div><!-- /.col-lg-4 -->
-        </div><!-- /.row -->
-
-        
-        <hr class="featurette-divider">
-
-        <div class="row featurette">
-          <div class="col-md-7">
-            <h2 class="featurette-heading">Ti viene sete.</h2>
-            <p class="lead">
-                E allora devi scegliere se bere dalla bottiglia o trovare altre soluzioni. <br/>
-                Poi se hai una bottiglia ma siete in due a bere è un problema, e allora che fai?
-                Jemplâ la <strong>tace</strong> di aghe, di vin o altri, baste che non bevi a sclips.
-            </p>
-          </div>
-          <div class="col-md-5">
-            <img class="featurette-image img-fluid mx-auto" data-src="" alt="500x500" style="width: 500px; height: 500px;" src="./images/bicchiere.jpeg" data-holder-rendered="true">
-          </div>
-        </div>
-
-        <hr class="featurette-divider">
-
-        <div class="row featurette">
-          <div class="col-md-7 order-md-2">
-            <h2 class="featurette-heading">Eh sì, son belli. <span class="text-muted">Ben detto.</span></h2>
-            <p class="lead">Sono così belli che spesso ti chiedono dove li hai presi. Così abbiamo pensato di rendere disponibile anche un visualizer online per capire quali possono essere i tuoi preferiti.</p>
-          </div>
-          <div class="col-md-5 order-md-1">
-            <img class="featurette-image img-fluid mx-auto" data-src="holder.js/500x500/auto" alt="500x500" src="./images/bicchiere2.jpeg" data-holder-rendered="true" style="width: 600px; height: 500px;">
-          </div>
-        </div>
-
-        <hr class="featurette-divider">
-
-        <div class="row featurette">
-          <div class="col-md-7">
-            <h2 class="featurette-heading">Però sbrigati. <span class="text-muted">Ne abbiamo pochi.</span></h2>
-            <p class="lead">I nostri bicchieri sono fabbricati a mano dalle mani dei nostri artigiani. Ogni pezzo è curato in dettaglio ed unico. Non perdere l'occasione.</p>
-          </div>
-          <div class="col-md-5">
-            <img class="featurette-image img-fluid mx-auto" data-src="holder.js/500x500/auto" alt="500x500" src="./images/vetrosoffiato.jpeg" data-holder-rendered="true" style="width: 500px; height: 500px;">
-          </div>
-        </div>
-
-        <!-- <hr class="featurette-divider"> -->
-
-        <!-- /END THE FEATURETTES -->
+    <footer class="footer">
+      <div class="container text-center">
+        <span class="text-light">Footer</span>
       </div>
-
-      <footer class="footer">
-        <div class="container text-center">
-          <span class="text-light">Footer</span>
-        </div>
-      </footer>
+    </footer>
 
     <script>
-      $(".nav-link").click(function(){
+      $(".nav-link").click(function(e){
+        e.preventDefault();
         $(".nav-link").addClass("text-white");
         $(this).removeClass("text-white");
         $(this).addClass("text-secondary");
+        $("#content").hide();
+        $("#content").load(this.href);
+        $("#content").fadeIn("slow");
       })
+
+      $("#content").load("main.html");
     </script>
 
     <!-- <script type="module" src="./code.js"></script> -->
