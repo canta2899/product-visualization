@@ -1,6 +1,7 @@
 import {RGBELoader} from './libs/RGBELoader.js';
+import {LightProbeGenerator} from "./libs/LightProbeGenerator.js";
 
-let gui, textureParams, vs, fs;
+let gui, textureParams, vs, fs, lightProbeEnv;
 
 vs = document.getElementById("vertex").textContent;
 fs = document.getElementById("fragment").textContent;
@@ -15,10 +16,17 @@ const renderer = new THREE.WebGLRenderer()
 renderer.setSize(window.innerWidth, window.innerHeight)
 document.body.appendChild(renderer.domElement)
 
-var textureParameters = {
-    material: "Metal",
+let textureParameters = {
+    material: "Wood",
     repeatS: 1.0,
     repeatT: 1.0
+}
+
+let lightParameters = {
+    red: 1.0,
+    green: 1.0,
+    blue: 1.0,
+    intensity: 1.0,
 }
 
 let diffuseMap = loadTexture("materials/" + textureParameters.material + "/" + textureParameters.material + "_Color.jpg");
@@ -30,31 +38,34 @@ new RGBELoader()
         texture.mapping = THREE.EquirectangularReflectionMapping;
         scene.background = texture;
         scene.environment = texture;
+        lightProbeEnv = new LightProbeGenerator.fromCubeTexture(texture)
         render()
     });
 
 // lights
 
-let ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
-scene.add(ambientLight);
-let directionalLight_1 = new THREE.DirectionalLight(0xffffff, 0.1);
-directionalLight_1.position.set(32, 0, 40);
-scene.add(new THREE.DirectionalLightHelper(directionalLight_1, 5))
-scene.add(directionalLight_1);
-let directionalLight_2 = new THREE.DirectionalLight(0xffffff, 0.1);
-directionalLight_2.position.set(8, 0, 40);
-scene.add(new THREE.DirectionalLightHelper(directionalLight_2, 5))
-scene.add(directionalLight_2);
-let directionalLight_3 = new THREE.DirectionalLight(0xffffff, 0.1);
-directionalLight_3.position.set(40, 0, 16);
-scene.add(new THREE.DirectionalLightHelper(directionalLight_3, 5))
-scene.add(directionalLight_3);
-let directionalLight_4 = new THREE.DirectionalLight(0xffffff, 0.1);
-directionalLight_4.position.set(0, 0, -40);
-scene.add(new THREE.DirectionalLightHelper(directionalLight_4, 5))
-scene.add(directionalLight_4);
 
-let ourMaterial = new THREE.ShaderMaterial({ uniforms: uniforms, vertexShader: vs, fragmentShader: fs });
+let uniforms = {
+    specularMap: { type: "t", value: specularMap},
+    diffuseMap:	{ type: "t", value: diffuseMap},
+    roughnessMap:	{ type: "t", value: roughnessMap},
+    pointLightPosition:	{ type: "v3", value: new THREE.Vector3() },
+    clight:	{ type: "v3", value: new THREE.Vector3() },
+    textureRepeat: { type: "v2", value: new THREE.Vector2(1,1) }
+};
+
+let lightMesh = new THREE.Mesh( new THREE.SphereGeometry( 1, 16, 16),
+    new THREE.MeshBasicMaterial ({color: 0xffff00, wireframe:true}));
+lightMesh.position.set( 7.0, 7.0, 7.0 );
+uniforms.pointLightPosition.value = new THREE.Vector3(
+    lightMesh.position.x,
+    lightMesh.position.y,
+    lightMesh.position.z
+);
+
+
+
+let ourMaterial = new THREE.ShaderMaterial({ uniforms: uniforms, vertexShader: vs, fragmentShader: fs});
 const objLoader = new THREE.OBJLoader()
 objLoader.load(
     'obj/wineglasses.obj',
@@ -75,15 +86,6 @@ objLoader.load(
         console.log('An error happened');
     }
 );
-
-var uniforms = {
-    specularMap: { type: "t", value: specularMap},
-    diffuseMap:	{ type: "t", value: diffuseMap},
-    roughnessMap:	{ type: "t", value: roughnessMap},
-    pointLightPosition:	{ type: "v3", value: new THREE.Vector3() },
-    clight:	{ type: "v3", value: new THREE.Vector3() },
-    textureRepeat: { type: "v2", value: new THREE.Vector2(1,1) }
-};
 
 const controls = new THREE.OrbitControls(camera, renderer.domElement)
 controls.enableDamping = true
@@ -109,6 +111,7 @@ function animate() {
 }
 
 function render() {
+    updateUniforms();
     renderer.render(scene, camera)
 }
 
@@ -127,7 +130,6 @@ function clearGui() {
 }
 
 function buildGui() {
-
     clearGui();
     let textureSettings = gui.addFolder('Texture parameters');
     textureSettings.add(textureParameters, 'material', ['Wood', 'Metal', 'Plastic']).onChange(
@@ -138,6 +140,18 @@ function buildGui() {
             ourMaterial.needsUpdate = true;
             render()
         });
+}
+
+function updateUniforms() {
+    uniforms.clight.value = new THREE.Vector3(
+        lightParameters.red * lightParameters.intensity,
+        lightParameters.green * lightParameters.intensity,
+        lightParameters.blue * lightParameters.intensity
+    );
+    uniforms.textureRepeat.value = new THREE.Vector2( textureParameters.repeatS, textureParameters.repeatT);
+    uniforms.diffuseMap.value = diffuseMap;
+    uniforms.specularMap.value = specularMap;
+    uniforms.roughnessMap.value = roughnessMap;
 }
 
 animate()
