@@ -9,3 +9,6 @@ We found a group of `.obj` files that we are able to use and we are now searchin
 
 Later on, we'll have to find out the best shaders and think about the lightning. 
 
+Our glasses will have a few materials avaiable: 
+
+- 
