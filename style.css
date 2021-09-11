@@ -1,0 +1,65 @@
+@import url('https://fonts.googleapis.com/css2?family=Urbanist:wght@100&display=swap');
+html, body {
+    margin: 0;
+    height: 100%;
+}
+
+body::-webkit-scrollbar{
+  display: none;
+}
+
+
+.footer{
+  z-index: 2000;
+  font-family: 'Urbanist', sans-serif;
+  padding: 8px;
+  font-size: 18px;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color:rgb(33, 37, 41, 0.95);
+}
+
+#intro{
+    background-image: url('./images/sofa1.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+canvas{
+  width: 100vw;
+  height: 100vh;
+  z-index: 3;
+}
+
+.nav-link:hover{
+  transform: scale(1.16);
+}
+
+header{
+  z-index: 10000;
+}
+
+.controls{
+  font-size: 1.3vh;
+  padding: 8vh;
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10000;
+  text-align: center;
+  background-color: rgb(33, 37, 41, 0.1);
+  width: 60%;
+  opacity: 0.96;
+}
+
+#menu{
+  position: fixed;
+  width: 100%;
+  text-align: center;
+  bottom: 0;
+  right: 0px;
+  padding: 30px;
+}
