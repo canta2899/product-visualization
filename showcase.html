@@ -26,6 +26,7 @@
     <script src="libs/OBJLoader.js"></script>
     
 
+	<!--Vertex shader-->
 	<script type="text/x-glsl" id="vertex">
 		attribute vec4 tangent;
 		varying vec3 vNormal;
@@ -51,6 +52,7 @@
 
 	</script>
 
+	<!--Fragment shader-->
 	<script type="text/x-glsl" id="fragment">
 		varying vec3 vNormal;
 		varying vec3 vTangent;
@@ -140,13 +142,17 @@
 		}
 	</script>
 </head>
+
 <body>
+	<!-- Three js code-->
 	<script type="module" src="./code.js"></script>
 
+	<!-- Header code-->
     <div id="header"></div>
     
-	<canvas></canvas>
+	<canvas></canvas> <!-- Canvas for Threejs scene-->
 
+	<!-- Menu -->
     <div class="shadow p-3 mb-5 bg-white rounded controls">
 		<h1>Info</h1>
 		<hr/>
@@ -175,10 +181,12 @@
 		  
     </div>
 
+	<!-- Menu button -->
 	<div id="menu">
 		<button type="button" class="btn btn-light">Menu</button>
-	</div>	
-    <!-- <div id="footer"></div> -->
+	</div>
+
+	<!-- Functions to load components and interact with menu-->
     <script>
 
 		var controls = false;
@@ -211,8 +219,7 @@
 			}
 		})
 
-        loadMainPage();
-        
+        loadMainPage(); 
     </script>
 
 </body>

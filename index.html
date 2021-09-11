@@ -17,23 +17,18 @@
 <body>
     <div id="header"></div>
     <div id="content"></div>
-    <!-- <div id="footer"></div> -->
 
     <script>
 
       function loadMainPage(){
         $("#header").load("header.html")
         $("#content").load("main.html");
-        // $("#footer").load("footer.html")
       }
 
       $(document).ready(function(){$("content").hide().fadeIn(500);});
 
       loadMainPage();
     </script>
-
-
-    <!-- <script type="module" src="./code.js"></script> -->
 
 </body>
 
