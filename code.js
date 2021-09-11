@@ -21,14 +21,14 @@ const renderer = new THREE.WebGLRenderer({canvas})
 renderer.setSize(window.innerWidth, window.innerHeight)
 
 let textureParameters = {
-    pillow_material_1: "Leather009",
-    pillow_material_2: "Leather011",
+    pillow_material_1: "Fabric036",
+    pillow_material_2: "Fabric042",
     lateral_material: "Leather011",
     bottom: "Wood070", // FISSO
     legs: "Metal032", // FISSO
     repeatS: 3.0, // FISSO
     repeatT: 3.0, // FISSO
-    normalScale: 1 // FISSO
+    normalScale: 2 // FISSO
 }
 
 let repeat = new THREE.Vector2(textureParameters.repeatS, textureParameters.repeatT);
@@ -217,6 +217,7 @@ objLoader.load(
         for (let i = 0; i < 12; i++) {
             let part = object.children[i]
             let geometry = part.geometry.toIndexed()
+            geometry.scale(2, 2, 2)
             let mesh;
             if (i === 6)
                 mesh = new THREE.Mesh(geometry, bottom_material);
