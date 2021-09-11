@@ -52,6 +52,7 @@ header{
   text-align: center;
   background-color: rgb(33, 37, 41, 0.1);
   width: 60%;
+  max-width: 400px;
   opacity: 0.96;
 }
 
