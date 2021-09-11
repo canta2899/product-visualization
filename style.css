@@ -33,8 +33,10 @@ canvas{
   z-index: 3;
 }
 
+
 .nav-link:hover{
   transform: scale(1.16);
+  /* background-color: gray; */
 }
 
 header{
@@ -42,7 +44,7 @@ header{
 }
 
 .controls{
-  font-size: 1.3vh;
+  font-size: 1.15vw;
   padding: 8vh;
   position: fixed;
   bottom: 0;
