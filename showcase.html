@@ -150,7 +150,7 @@
                 vec3 Fr = (D * V) * F;
 
                 // diffuse BRDF
-                vec3 Fd = cdiff * Fd_Lambert();
+                vec3 Fd = vec3(0.0) * Fd_Lambert();
 
                 float clearCoatPerceptualRoughness = 0.5;
                 clearCoatPerceptualRoughness = clamp(clearCoatPerceptualRoughness, 0.089, 1.0);
@@ -159,12 +159,11 @@
                 // clear coat BRDF
                 float  Dc = D_GGX(nDoth, clearCoatRoughness);
                 float  Vc = V_Kelemen(lDoth);
-                vec3  Fc = F_Schlick(lDoth, vec3(0.04)) * 0.5; // clear coat strength
+                vec3  Fc = F_Schlick(lDoth, cdiff) * 0.5; // clear coat strength
                 vec3  Frc = (Dc * Vc) * Fc;
 
                 vec3 color = (Fd + Fr * (1.0 - Fc)) * (1.0 - Fc) + Frc;
                 color *= clight * nDotl;
-                color = mix(color, envLight * f0, 0.2);
                 totalColor += color;
             }
 
