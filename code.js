@@ -241,7 +241,9 @@ function buildMaterial(type) {
 
 function loadNewTexture(type) {
     textures[type].diffuseMap = callLoadTexture(textureParameters[type], "Color");
-    textures[type].specularMap = callLoadTexture(textureParameters[type], "Specular");
+    if(type != "bottom"){
+        textures[type].specularMap = callLoadTexture(textureParameters[type], "Specular");
+    }
     textures[type].roughnessMap = callLoadTexture(textureParameters[type], "Roughness");
     textures[type].normalMap = callLoadTexture(textureParameters[type], "NormalGL");
     materials[type].needsUpdate = true;
@@ -263,17 +265,27 @@ function updateUniforms() {
     uniforms.lateral.specularMap.value = textures.lateral.specularMap;
     uniforms.lateral.roughnessMap.value = textures.lateral.roughnessMap;
     uniforms.lateral.normalMap.value = textures.lateral.normalMap;
+
+    uniforms.bottom.diffuseMap.value = textures.bottom.diffuseMap;
+    // uniforms.bottom.specularMap.value = textures.bottom.specularMap;
+    uniforms.bottom.roughnessMap.value = textures.bottom.roughnessMap;
+    uniforms.bottom.normalMap.value = textures.bottom.normalMap;
 }
 
 function updateMaterials() {
     materials.pillow_1.fragmentShader = getFragment(textureParameters.pillow_1);
     materials.pillow_2.fragmentShader = getFragment(textureParameters.pillow_2);
     materials.lateral.fragmentShader = getFragment(textureParameters.lateral);
+    materials.bottom.fragmentShader = getFragment(textureParameters.bottom);
 }
 
 function getFragment(material) {
     if (material.includes('Fabric'))
         return fs_cloth;
+    else if(material.includes('Metal'))
+        return fs_metal;
+    else if(material.includes('Wood'))
+        return fs_wood;
     else
         return fs_leather;
 }
@@ -282,16 +294,18 @@ document.querySelectorAll('.form-select').forEach(selectElement => {
         let defaultPrice = 650;
         document.querySelector("#price").innerHTML = defaultPrice;
         selectElement.addEventListener('change', (event) => {
-            let newPrice = defaultPrice;
             if (selectElement.id === "1") {
                 textureParameters.pillow_1 = event.target.value;
                 loadNewTexture('pillow_1');
             } else if (selectElement.id === "2") {
                 textureParameters.pillow_2 = event.target.value;
                 loadNewTexture('pillow_2');
-            } else {
+            } else if (selectElement.id === "3"){
                 textureParameters.lateral = event.target.value;
                 loadNewTexture('lateral');
+            } else{
+                textureParameters.bottom = event.target.value;
+                loadNewTexture('bottom');
             }
             document.querySelector("#price").innerHTML = parseInt(selectElement.id)*10 + 49 + defaultPrice;
         });
