@@ -35,3 +35,17 @@ In the main folder you can also find:
 
 Since we decided to work on a sofa company, we searched for a well-made 3D model of a couch. We decided to use [this one](https://www.cgtrader.com/free-3d-models/furniture/sofa/couch-williams-302), which is under a **royalty free license** as the [CGTrader](https://www.cgtrader.com/) website states. 
 
+The textures used are all **public domain** and have been download from [ambientCG](https://ambientcg.com/), we decided to use: 
+
+- Four varieties of Fabric materials
+- Two varieties of Leather materials
+- A metal texture for the sofa's legs
+- A metal and a wooden texture for the sofa's base 
+
+## Environment Map 
+
+We used an environment map which represent a domestic settings in order to place the product in the environment it belongs to. The map was downloaded as a HQ cube map (and later scaled to a proper resolution in order to avoid long loading times) from [Poly Haven](https://polyhaven.com/a/studio_country_hall) under a [CC0](https://wiki.creativecommons.org/wiki/CC0_FAQ) (public domain) license.
+
+
+
+

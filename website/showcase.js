@@ -304,24 +304,58 @@ function getFragment(material) {
         return fs_leather;
 }
 
+function mapPrices(material){
+    if(material === "Fabric009")
+        return 209.0;
+    else if(material === "Fabric008")
+        return 229.0;
+    else if(material === "Fabric042")
+        return 269.0;
+    else if(material === "Fabric036")
+        return 249.0;
+    else if(material === "Leather009")
+        return 329.0;
+    else if(material === "Leather011")
+        return 369.0;
+    else if(material === "MetalPlates006")
+        return 419.0;
+    else if(material === "Wood070")
+        return 399.0;
+    else
+        return 0.0;
+}
+
+let configuration = ["Fabric009", "Fabric008", "Fabric008", "MetalPlates006"];
+
+function computePrice(){
+    let price = 0.0;
+    configuration.forEach((el) => {
+        price += mapPrices(el);
+    })
+    return price;
+}
+
 document.querySelectorAll('.form-select').forEach(selectElement => {
-        let defaultPrice = 650;
-        document.querySelector("#price").innerHTML = defaultPrice;
+        document.querySelector("#price").innerHTML = computePrice() + 0.99;
         selectElement.addEventListener('change', (event) => {
             if (selectElement.id === "1") {
                 textureParameters.pillow_1 = event.target.value;
+                configuration[0] = event.target.value;
                 loadNewTexture('pillow_1');
             } else if (selectElement.id === "2") {
                 textureParameters.pillow_2 = event.target.value;
+                configuration[1] = event.target.value;
                 loadNewTexture('pillow_2');
             } else if (selectElement.id === "3"){
                 textureParameters.lateral = event.target.value;
+                configuration[2] = event.target.value;
                 loadNewTexture('lateral');
             } else{
                 textureParameters.bottom = event.target.value;
+                configuration[3] = event.target.value;
                 loadNewTexture('bottom');
             }
-            document.querySelector("#price").innerHTML = parseInt(selectElement.id)*10 + 49 + defaultPrice;
+            document.querySelector("#price").innerHTML = price + 0.99;
         });
     }
 );
