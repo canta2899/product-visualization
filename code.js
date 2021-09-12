@@ -209,6 +209,7 @@ function initTextures() {
     textures.lateral.specularMap = callLoadTexture(textureParameters.lateral, "Specular");
 
     textures.legs.metalnessMap =  callLoadTexture(textureParameters.legs, "Metalness");
+    textures.bottom.metalnessMap =  callLoadTexture(textureParameters.bottom, "Metalness");
 }
 
 function buildUniform(type) {
@@ -267,7 +268,6 @@ function updateUniforms() {
     uniforms.lateral.normalMap.value = textures.lateral.normalMap;
 
     uniforms.bottom.diffuseMap.value = textures.bottom.diffuseMap;
-    // uniforms.bottom.specularMap.value = textures.bottom.specularMap;
     uniforms.bottom.roughnessMap.value = textures.bottom.roughnessMap;
     uniforms.bottom.normalMap.value = textures.bottom.normalMap;
 }
