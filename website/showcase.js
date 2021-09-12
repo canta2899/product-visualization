@@ -29,35 +29,8 @@ let canvas = document.querySelector("canvas")
 const renderer = new THREE.WebGLRenderer({canvas, antialias: true})
 renderer.setSize(window.innerWidth, window.innerHeight)
 
-const toneMappingOptions = {
-    None: THREE.NoToneMapping,
-    Linear: THREE.LinearToneMapping,
-    Reinhard: THREE.ReinhardToneMapping,
-    Cineon: THREE.CineonToneMapping,
-    ACESFilmic: THREE.ACESFilmicToneMapping,
-    Custom: THREE.CustomToneMapping
-};
-
-
-function mapToneMappingValue(name){
-    return toneMappingOptions[name];
-}
-
-document.getElementById("toneMapping").addEventListener('change', (e) => {
-    renderer.toneMapping = mapToneMappingValue(e.target.value);
-    render();
-});
-
-renderer.toneMapping = mapToneMappingValue("Reinhard");
-
-// let composer = new THREE.EffectComposer( renderer );
-// composer.addPass( new THREE.RenderPass( scene, camera ) );
-// // let saturationEffect = new THREE.ShaderPass( saturationShader );
-// // composer.addPass( saturationEffect );
-// let passthrough = new THREE.ShaderPass( THREE.CopyShader);
-// passthrough.renderToScreen = true;
-// composer.addPass( passthrough );
-
+// We decided to use cineon tonemapping 
+renderer.toneMapping = THREE.CineonToneMapping;
 
 
 let textureParameters = {

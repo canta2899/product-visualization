@@ -97,7 +97,7 @@ This is how it looks like:
 
 ![ToneMapping Feature](./media/tonemapping.png)
 
-We decided that the **Reinhard** tone mapping was the best choice for our purposes. 
+We decided that the **Cineon** tone mapping was the best choice for our purposes, because allows the user to focus on the product without being distracted by the Environment Map.
 
 
 
