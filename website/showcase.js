@@ -113,7 +113,7 @@ let materials = {
     legs: {}
 }
 
-var stats = new Stats();
+let stats = new Stats();
 stats.domElement.style.position = 'absolute';
 stats.domElement.style.top = '50px';
 document.body.appendChild( stats.domElement );
@@ -256,7 +256,7 @@ function buildMaterial(type) {
 
 function loadNewTexture(type) {
     textures[type].diffuseMap = callLoadTexture(textureParameters[type], "Color");
-    if(type != "bottom"){
+    if(type !== "bottom"){
         textures[type].specularMap = callLoadTexture(textureParameters[type], "Specular");
     }
     textures[type].roughnessMap = callLoadTexture(textureParameters[type], "Roughness");
