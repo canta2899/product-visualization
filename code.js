@@ -99,6 +99,13 @@ let materials = {
     bottom: {},
     legs: {}
 }
+
+var stats = new Stats();
+stats.domElement.style.position = 'absolute';
+stats.domElement.style.top = '50px';
+document.body.appendChild( stats.domElement );
+
+
 buildMaterial('pillow_1');
 buildMaterial('pillow_2');
 buildMaterial('lateral');
@@ -153,6 +160,7 @@ function onWindowResize() {
 function animate() {
     requestAnimationFrame(animate)
     controls.update()
+    stats.update();
     render()
 }
 
@@ -271,7 +279,8 @@ function getFragment(material) {
 }
 
 document.querySelectorAll('.form-select').forEach(selectElement => {
-        let defaultPrice = 200.00;
+        let defaultPrice = 650;
+        document.querySelector("#price").innerHTML = defaultPrice;
         selectElement.addEventListener('change', (event) => {
             let newPrice = defaultPrice;
             if (selectElement.id === "1") {
@@ -279,16 +288,13 @@ document.querySelectorAll('.form-select').forEach(selectElement => {
                 loadNewTexture('pillow_1');
             } else if (selectElement.id === "2") {
                 textureParameters.pillow_2 = event.target.value;
-                newPrice += 59.99;
                 loadNewTexture('pillow_2');
             } else {
                 textureParameters.lateral = event.target.value;
-                newPrice += 39.99;
                 loadNewTexture('lateral');
             }
-            document.querySelector("#price").innerHTML = newPrice;
+            document.querySelector("#price").innerHTML = parseInt(selectElement.id)*10 + 49 + defaultPrice;
         });
-        document.querySelector("#price").innerHTML = defaultPrice;
     }
 );
 
