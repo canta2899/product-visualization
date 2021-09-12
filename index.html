@@ -10,28 +10,146 @@
     <link rel="icon" href="favicon.ico" type="image/x-icon" />
     <link rel="shortcut icon" href="./images/sofa.ico" type="image/x-icon" />
     <link rel="stylesheet" href="style.css">
-
-    <!-- Bootstrap -->
-    <script src="libs/jquery.min.js"></script>  
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
 </head>
 
 <body>
     <div id="header"></div>
-    <div id="content"></div>
+    
+    <div id="intro" class="position-relative overflow-hidden p-3 p-md-3 m-md-10 text-center bg-light">
+      <div id="introcontent">
+          <div class="col-md-5 p-lg-5 mx-auto my-5">
+          <h1 class="display-4 font-weight-normal text-light">Ci sediamo.</h1>
+          <p class="lead font-weight-normal text-white">E per questo è importante che i divani non manchino.</p>
+          <a href="showcase.html" class="outlink btn btn-light">Dai un'occhiata</a>
+          </div>
+          <div class="product-device shadow-sm d-none d-md-block"></div>
+          <div class="product-device product-device-2 shadow-sm d-none d-md-block"></div>
+      </div>
+  </div>
+  
+  <div class="container marketing">
+  
+    <!-- Three columns -->
+    <div class="row mb-4 mt-5">
+      <div class="col-lg-6 text-center">
+        <img class="rounded-circle" src="./images/leather.jpg" alt="Generic placeholder image" width="140" height="140">
+        <h2 class>Pelle</h2>
+        <!--<p></p>-->
+        <button class="btn btn-secondary" data-toggle="modal" data-target="#leather">Scopri di più »</button>
+      </div><!-- /.col-lg-4 -->
+      <div class="col-lg-6 text-center">
+        <img class="rounded-circle" src="./images/fabric.jpg" alt="Generic placeholder image" width="140" height="140">
+        <h2>Tessuto</h2>
+        <button class="btn btn-secondary" data-toggle="modal" data-target="#fabric">Scopri di più »</button>
+      </div><!-- /.col-lg-4 -->
+      <!-- <div class="col-lg-4 text-center">
+        <img class="rounded-circle" src="./images/iron.jpeg" alt="Generic placeholder image" width="140" height="140">
+        <h2>Acciaio</h2>
+        <p><a class="btn btn-secondary" href="#" role="button">Esplora »</a></p>
+      </div> -->
+      <!-- /.col-lg-4 -->
+    </div><!-- /.row -->
+  
+      <!-- Modal leather-->
+    <div class="modal fade" id="leather" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">La nostra pelle</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            Per i tuoi divani scegli uno dei nostri divani in pelle eleganti. Fatti per durare. 
+            Vera pelle o ecopelle, varietà di colori, tappezzeria dettagliata, artigianato eccellente.
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-dark">Chiudi</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+      <!-- Modal fabric-->
+      <div class="modal fade" id="fabric" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLongTitle">I nostri tessuti</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              Ci sono divani con tessuti naturali, come cotone, seta e lino, 
+              oppure divani rivestiti con tessuti sintetici, come la microfibra 
+              o il poliestere.
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-dark">Chiudi</button>
+            </div>
+          </div>
+        </div>
+      </div>
 
-    <script>
+    <hr class="featurette-divider">
 
-      function loadMainPage(){
-        $("#header").load("header.html")
-        $("#content").load("main.html");
-      }
+    <div class="row featurette">
+      <div class="col-md-7">
+        <h2 class="featurette-heading">E all'improvviso ti vuoi sedere.</h2>
+        <p class="lead">
+            E non c'è niente di meglio di un comodo divano pronto ad accoglierti.
+            Realizziamo i nostri prodotti con passione e con a cuore l'interesse dei nostri clienti. Lasciati confortare.
+        </p>
+      </div>
+      <div class="col-md-5">
+        <img class="featurette-image img-fluid mx-auto" data-src="" alt="500x500" style="width: 500px; height: 500px;" src="./images/sofa2.jpg" data-holder-rendered="true">
+      </div>
+    </div>
 
-      $(document).ready(function(){$("content").hide().fadeIn(500);});
+    <hr class="featurette-divider">
 
-      loadMainPage();
-    </script>
+    <div class="row featurette">
+      <div class="col-md-7 order-md-2">
+        <h2 class="featurette-heading">Eh sì, sono belli. <span class="text-muted">Ben detto.</span></h2>
+        <p class="lead">Sono così belli che tutti ti chiedono dove hai preso il divano. Così abbiamo pensato di rendere disponibile anche un visualizer online per capire qual è il tuo preferito.</p>
+      </div>
+      <div class="col-md-5 order-md-1">
+        <img class="featurette-image img-fluid mx-auto" data-src="holder.js/500x500/auto" alt="500x500" style="width: 500px; height: 500px;" src="./images/sofa3.jpg" data-holder-rendered="true">
+      </div>
+    </div>
 
+    <hr class="featurette-divider">
+
+    <div class="row featurette">
+      <div class="col-md-7">
+        <h2 class="featurette-heading">Però sbrigati. <span class="text-muted">Ne abbiamo pochi.</span></h2>
+        <p class="lead">I nostri divani sono fabbricati a mano dalle mani dei nostri artigiani. Ogni pezzo è curato nel dettaglio ed unico. Non perdere l'occasione.</p>
+      </div>
+      <div class="col-md-5">
+        <img class="featurette-image img-fluid mx-auto" data-src="holder.js/500x500/auto" alt="500x500" style="width: 500px; height: 500px;" src="./images/sofa5.jpg" data-holder-rendered="true" style="width: 500px; height: 500px;">
+      </div>
+    </div>
+      <!-- /END THE FEATURETTES -->
+  </div>
+  
+  <div style="height: 50px;"></div>
+  
+  <script src="libs/jquery.min.js"></script>  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+  
+  <script>
+    function loadMainPage(){
+      $("#header").load("header.html")
+    }
+
+    $(document).ready(function(){$("content").hide().fadeIn(500);});
+
+    loadMainPage();
+  </script>
 </body>
 
 </html>

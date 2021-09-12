@@ -40,7 +40,7 @@ canvas{
 }
 
 header{
-  z-index: 10000;
+  z-index: 2000;
 }
 
 .controls{

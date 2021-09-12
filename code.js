@@ -12,7 +12,7 @@ fs_leather = document.getElementById("fragment_leather").textContent;
 
 const scene = new THREE.Scene();
 let camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 100);
-camera.position.set(0, 0, 7);
+camera.position.set(0, 5, 9);
 camera.lookAt(0, 0, 0);
 
 
@@ -138,6 +138,8 @@ objLoader.load(
 
 const controls = new THREE.OrbitControls(camera, renderer.domElement)
 controls.enableDamping = true
+controls.minDistance = 5;
+controls.maxDistance = 13;
 
 window.addEventListener('resize', onWindowResize, false)
 
@@ -282,4 +284,5 @@ document.querySelectorAll('.form-select').forEach(selectElement =>
         }
     })
 );
+
 animate()

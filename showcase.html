@@ -6,7 +6,7 @@
 	<!-- Meta and links -->
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
 	<link rel="icon" href="favicon.ico" type="image/x-icon" />
 	<link rel="shortcut icon" href="./images/sofa.ico" type="image/x-icon" />
 	<link rel="stylesheet" href="style.css">
@@ -18,10 +18,6 @@
     </style>
 
     <!-- Bootstrap -->
-    <script src="libs/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
-            crossorigin="anonymous"></script>
 
     <!--ThreeJS-->
     <script src="libs/three.js"></script>
@@ -472,69 +468,76 @@
 </head>
 
 <body>
-	<!-- Three js code-->
-	<script type="module" src="./code.js"></script>
-
 	<!-- Header code-->
     <div id="header"></div>
     
 	<canvas></canvas> <!-- Canvas for Threejs scene-->
 
-	<!-- Menu -->
-    <div class="shadow p-3 mb-5 bg-white rounded controls">
-		<h1>Scegli i materiali</h1>
-		<hr/>
-        Primo gruppo di cuscini e fondo
-		<select class="form-select" id="1" aria-label="Default select example" onfocus="scrollToTop()">
-			<option value="Fabric009" selected>Tessuto a rombi rosso</option>
-			<option value="Fabric008">Tessuto a rombi crema</option>
-			<option value="Fabric042">Tessuto intrecciato nero</option>
-			<option value="Fabric036">Tessuto intrecciato bianco</option>
-			<option value="Leather009">Eco-pelle nera</option>
-			<option value="Leather011">Eco-pelle rossa</option>
-		</select>
-
-        <hr/>
-
-        Secondo gruppo di cuscini e schienale
-		<select class="form-select" id="2" aria-label="Default select example" onfocus="scrollToTop()">
-			<option value="Fabric009">Tessuto a rombi rosso</option>
-			<option value="Fabric008" selected>Tessuto a rombi crema</option>
-			<option value="Fabric042">Tessuto intrecciato nero</option>
-			<option value="Fabric036">Tessuto intrecciato bianco</option>
-			<option value="Leather009">Eco-pelle nera</option>
-			<option value="Leather011">Eco-pelle rossa</option>
-		</select>
-
-		<hr/>
-
-		Cuscini laterali
-		<select class="form-select" id="3" aria-label="Default select example" onfocus="scrollToTop()">
-			<option value="Fabric009">Tessuto a rombi rosso</option>
-			<option value="Fabric008" selected>Tessuto a rombi crema</option>
-			<option value="Fabric042">Tessuto intrecciato nero</option>
-			<option value="Fabric036">Tessuto intrecciato bianco</option>
-			<option value="Leather009">Eco-pelle nera</option>
-			<option value="Leather011">Eco-pelle rossa</option>
-		</select>
-
-		<hr/>
-		  
-		<p class="price"><strong>Prezzo</strong>: TANTI € </p>
-
-		<button type="button" class="btn btn-secondary">Chiudi</button>
-		  
-    </div>
-
 	<!-- Menu button -->
 	<div id="menu">
-		<button type="button" class="btn btn-light">Menu</button>
+		<button type="button" class="btn btn-light" data-toggle="modal" data-target="#options">Menu</button>
 	</div>
 
+    <div class="modal fade" id="options" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLongTitle">Configura il prodotto</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                Primo gruppo di cuscini e fondo
+                <select class="form-select" id="1" aria-label="Default select example" onfocus="scrollToTop()">
+                    <option value="Fabric009" selected>Tessuto a rombi rosso</option>
+                    <option value="Fabric008">Tessuto a rombi crema</option>
+                    <option value="Fabric042">Tessuto intrecciato nero</option>
+                    <option value="Fabric036">Tessuto intrecciato bianco</option>
+                    <option value="Leather009">Eco-pelle nera</option>
+                    <option value="Leather011">Eco-pelle rossa</option>
+                  </select>
+                  
+        
+                <hr/>
+        
+                Secondo gruppo di cuscini e schienale
+                <select class="form-select" id="2" aria-label="Default select example" onfocus="scrollToTop()">
+                    <option value="Fabric009">Tessuto a rombi rosso</option>
+                    <option value="Fabric008" selected>Tessuto a rombi crema</option>
+                    <option value="Fabric042">Tessuto intrecciato nero</option>
+                    <option value="Fabric036">Tessuto intrecciato bianco</option>
+                    <option value="Leather009">Eco-pelle nera</option>
+                    <option value="Leather011">Eco-pelle rossa</option>
+                  </select>
+        
+                <hr/>
+
+                Cuscini laterali
+                <select class="form-select" id="3" aria-label="Default select example" onfocus="scrollToTop()">
+                    <option value="Fabric009">Tessuto a rombi rosso</option>
+                    <option value="Fabric008" selected>Tessuto a rombi crema</option>
+                    <option value="Fabric042">Tessuto intrecciato nero</option>
+                    <option value="Fabric036">Tessuto intrecciato bianco</option>
+                    <option value="Leather009">Eco-pelle nera</option>
+                    <option value="Leather011">Eco-pelle rossa</option>
+                </select>
+
+                <hr/>
+                        
+                <p class="lead text-muted"><strong>Prezzo</strong>: <span id="price"></span> €</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Chiudi</button>
+              <button type="button" class="btn btn-primary">Acquista</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+
+    <script src="libs/jquery.min.js"></script>  
     <script>
-
-		/* Functions to load components and interact with menu */
-
 		var controls = false;
 
 		function scrollToTop(){
@@ -557,27 +560,11 @@
 		})
         
         $(document).ready(function(){$("canvas").hide().fadeIn(1000);});
-        
-
-		$("#menu > button").click(function(){
-			if (!controls){
-				$(".controls").fadeIn("fast");
-				controls = true;
-				$("#menu").hide();
-			}
-		})
-
-		$(".controls > button").click(function(){
-			if(controls){
-				$(".controls").fadeOut("fast");
-				controls = false;
-				$("#menu").fadeIn("fast");
-			}
-		})
-
-        loadMainPage(); 
-
     </script>
+    <script type="module" src="./code.js"></script> <!-- Three js code-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script>loadMainPage()</script>
 
 </body>
 </html>
