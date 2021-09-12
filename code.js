@@ -17,18 +17,18 @@ camera.lookAt(0, 0, 0);
 
 
 let canvas = document.querySelector("canvas")
-const renderer = new THREE.WebGLRenderer({canvas})
+const renderer = new THREE.WebGLRenderer({canvas, antialias: true})
 renderer.setSize(window.innerWidth, window.innerHeight)
 
 let textureParameters = {
     pillow_1: "Fabric009",
     pillow_2: "Fabric008",
     lateral: "Fabric008",
-    bottom: "Wood070", // FISSO
+    bottom: "MetalPlates006", // FISSO
     legs: "Metal032", // FISSO
     repeatS: 4.0, // FISSO
     repeatT: 4.0, // FISSO
-    normalScale: 1 // FISSO
+    normalScale: 5 // FISSO
 }
 
 let textures = {
@@ -227,7 +227,7 @@ function buildMaterial(type) {
     if (type === 'legs')
         materials[type].fragmentShader = fs_metal;
     else if (type === 'bottom')
-        materials[type].fragmentShader = fs_wood;
+        materials[type].fragmentShader = fs_metal;
     updateMaterials();
 }
 
