@@ -270,19 +270,26 @@ function getFragment(material) {
         return fs_leather;
 }
 
-document.querySelectorAll('.form-select').forEach(selectElement =>
-    selectElement.addEventListener('change', (event) => {
-        if (selectElement.id === "1") {
-            textureParameters.pillow_1 = event.target.value;
-            loadNewTexture('pillow_1');
-        } else if (selectElement.id === "2") {
-            textureParameters.pillow_2 = event.target.value;
-            loadNewTexture('pillow_2');
-        } else {
-            textureParameters.lateral = event.target.value;
-            loadNewTexture('lateral');
-        }
-    })
+document.querySelectorAll('.form-select').forEach(selectElement => {
+        let defaultPrice = 200.00;
+        selectElement.addEventListener('change', (event) => {
+            let newPrice = defaultPrice;
+            if (selectElement.id === "1") {
+                textureParameters.pillow_1 = event.target.value;
+                loadNewTexture('pillow_1');
+            } else if (selectElement.id === "2") {
+                textureParameters.pillow_2 = event.target.value;
+                newPrice += 59.99;
+                loadNewTexture('pillow_2');
+            } else {
+                textureParameters.lateral = event.target.value;
+                newPrice += 39.99;
+                loadNewTexture('lateral');
+            }
+            document.querySelector("#price").innerHTML = newPrice;
+        });
+        document.querySelector("#price").innerHTML = defaultPrice;
+    }
 );
 
 animate()
