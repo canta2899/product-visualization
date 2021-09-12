@@ -28,7 +28,7 @@ let textureParameters = {
     legs: "Metal032", // FISSO
     repeatS: 4.0, // FISSO
     repeatT: 4.0, // FISSO
-    normalScale: 5 // FISSO
+    normalScale: 2 // FISSO
 }
 
 let textures = {
