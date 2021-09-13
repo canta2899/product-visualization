@@ -93,7 +93,7 @@ This is how it looks like:
 
 ![ToneMapping Feature](./media/tonemapping.png)
 
-We decided that the **Cineon** tone mapping was the best choice for our purposes, because allows the user to focus on the product without being distracted by the Environment Map.
+We decided that the **Cineon** tone mapping was the best choice for our purposes, because allows the user to focus on the product without being distracted by the Environment Map. In order to apply the tonemapping to our custom shaders too, we used a cineon function we found on shadertoy at [this](https://www.shadertoy.com/view/XsGfWV) link.
 
 
 

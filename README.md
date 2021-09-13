@@ -112,7 +112,7 @@ and here are a few of the **possible configurations** (but many others are possi
 
 ## Tonemapping
 
-At the end we decided to apply some **tonemapping** to our renderer. After some experiments, we decided to use the **Cineon** type. In fact, it allows the user to focus on the product without being distracted by the surrounding environment. 
+At the end we decided to apply some **tonemapping** to our renderer. After some experiments, we decided to use the **Cineon** type. In fact, it allows the user to focus on the product without being distracted by the surrounding environment. In order to apply the tonemapping to our custom shaders too, we used this [Aces Tonemapping Function](https://www.shadertoy.com/view/XsGfWV) by [afl_ext](https://www.shadertoy.com/user/afl_ext) that we found on [Shadertoy](https://www.shadertoy.com/).
 
 ## Performances
 
