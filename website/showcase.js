@@ -221,7 +221,7 @@ function callLoadTexture(material, textureType){
 }
 
 
-// Loads textures maps for each avaiable material
+// Loads textures maps for each available material
 function initTextures() {
     textures.pillow_1.diffuseMap = callLoadTexture(textureParameters.pillow_1, "Color");
     textures.pillow_2.diffuseMap = callLoadTexture(textureParameters.pillow_2, "Color");
