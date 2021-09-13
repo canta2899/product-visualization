@@ -4,7 +4,7 @@
     <img src="./media/look.png">
 </p>
 
-This repository constains the project developed by Francesco Bombassei De Bona and Andrea Cantarutti (A.A. 2020/2021) and based on the second assignment of the Interactive 3D Graphics course.
+This repository contains the project developed by Francesco Bombassei De Bona and Andrea Cantarutti (A.A. 2020/2021) and based on the second assignment of the Interactive 3D Graphics course.
 
 ## Description
 
