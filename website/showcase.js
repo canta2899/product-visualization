@@ -33,7 +33,7 @@ renderer.setSize(window.innerWidth, window.innerHeight)
 renderer.setPixelRatio(window.devicePixelRatio);
 
 // Cineon tonemapping (choice described in the report)
-renderer.toneMapping = THREE.CineonToneMapping;
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
 
 // Default texture configuration
 
