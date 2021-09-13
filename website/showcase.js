@@ -1,5 +1,5 @@
 import './libs/three.js';
-import Stats from './libs/stats.module.js'
+// import Stats from './libs/stats.module.js'
 import './libs/OrbitControls.js';
 import './libs/OBJLoader.js';
 import './libs/BufferGeometryUtils.js';
@@ -113,10 +113,10 @@ let materials = {
     legs: {}
 }
 
-let stats = new Stats();
-stats.domElement.style.position = 'absolute';
-stats.domElement.style.top = '50px';
-document.body.appendChild( stats.domElement );
+// let stats = new Stats();
+// stats.domElement.style.position = 'absolute';
+// stats.domElement.style.top = '50px';
+// document.body.appendChild( stats.domElement );
 
 
 buildMaterial('pillow_1');
@@ -173,7 +173,7 @@ function onWindowResize() {
 function animate() {
     requestAnimationFrame(animate)
     controls.update()
-    stats.update();
+    // stats.update();
     render()
 }
 

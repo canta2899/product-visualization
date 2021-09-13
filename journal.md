@@ -48,9 +48,11 @@ We also find out about the **Leather model**, the **Metal model** and the **Wood
 
 We were able to integrate this code in our fragment shaders, that also involves multiple lightning, environment map and texture usage.
 
-## Lightning
+## Lights
 
-In order to add proper lightning to our scene we decided to include four **point lights** that enlight the couch's surface from four different angles. This allows the viewer to always look at a fully illuminated sofa since he will be able to orbitate around it inside the scene.
+In order to add proper lightning to our scene we decided to include eight **point lights** that enlight the couch's surface from eight different angles. This allows the viewer to always look at a fully illuminated sofa since he will be able to orbitate around it inside the scene.
+
+<center><img src="./media/lights.png" width="50%"></center>
 
 ## Creating the configuration menu
 
@@ -78,12 +80,6 @@ On a retina display with a 60 Hz refresh rate the scene reaches a constant value
 On an iPhone 11 display with a 60 Hz refresh rate the scene keeps a constant value of **60 fps** too.
 
 <center><img src="./media/performances_phone.png" alt="fps Phone" width="50%"/></center>
-
-## Some more refinements
-
-In order to make the metal base and legs more realistic, we made some variations in the metal's fragment shader. We applied to the metal material the reflections of the environment map, combined with a clear coat BRDF (again, from Filament) which allows the metal to reflect lights more realistically. 
-
-We like the result and we are happy of our work. 
 
 ## Some post-processing work
 
