@@ -74,10 +74,6 @@ let textureCube = loader.load([
 scene.background = textureCube;
 textureCube.minFilter = THREE.LinearMipMapLinearFilter;
 
-let materialExtensions = {
-    shaderTextureLOD: true
-};
-
 // Adds the eight lights according to the technique described in the report
 
 let lightParameters = {
@@ -170,7 +166,7 @@ objLoader.load(
     }
 )
 
-/* 
+/*
     Orbit controls to inspect the product. Zoom is limited
     in order to avoid clipping or too much distancing.
 */
@@ -202,7 +198,7 @@ function animate() {
 }
 
 function render() {
-    updateMaterials();
+    updateFragmentShaders();
     updateUniforms();
     renderer.render(scene, camera)
 }
@@ -254,7 +250,7 @@ function initTextures() {
 }
 
 
-// Builds uniforms for the shader, according to the material type 
+// Builds uniforms for the shader, according to the material type
 function buildUniform(type) {
     uniforms[type].normalScale = {type: "v2", value: new THREE.Vector2(1, 1)};
     uniforms[type].textureRepeat = {type: "v2", value: repeat};
@@ -265,29 +261,24 @@ function buildUniform(type) {
     uniforms[type].roughnessMap = {type: "t", value: textures[type].roughnessMap};
     if (type !== 'legs' && type !== 'bottom')
         uniforms[type].specularMap = {type: "t", value: textures[type].specularMap};
-    else if (type === 'legs')
+    else if (type === 'legs' || (type === 'bottom' && textureParameters.bottom.includes("Metal"))) {
         uniforms[type].metalnessMap = {type: "t", value: textures[type].metalnessMap};
         uniforms[type].envMap = {type: "t", value: textureCube};
+    }
 }
 
 
-/* 
+/*
     Builds the right material (binding it to the proper shader)
     for the given material type
 */
 function buildMaterial(type) {
     materials[type] = new THREE.ShaderMaterial({
         uniforms: uniforms[type],
-        vertexShader: vs,
-        extensions: materialExtensions
+        vertexShader: vs
     });
     if (type === 'legs')
         materials[type].fragmentShader = fs_metal;
-    else if (type === 'bottom')
-        materials[type].fragmentShader = fs_metal;
-    
-    // Assigns the proper fragment shader to each one of the selected materials
-    updateMaterials();
 }
 
 // Once the texture for the given type is changed, loads the new textures from the file
@@ -322,10 +313,15 @@ function updateUniforms() {
     uniforms.bottom.diffuseMap.value = textures.bottom.diffuseMap;
     uniforms.bottom.roughnessMap.value = textures.bottom.roughnessMap;
     uniforms.bottom.normalMap.value = textures.bottom.normalMap;
+
+    if (textureParameters.bottom.includes("Metal")) {
+        uniforms.bottom.metalnessMap.value = textures.bottom.metalnessMap;
+        uniforms.bottom.envMap.value = textures.bottom.envMap;
+    }
 }
 
 // Updates the fragment shader for each material according to the selected texture
-function updateMaterials() {
+function updateFragmentShaders() {
     materials.pillow_1.fragmentShader = getFragment(textureParameters.pillow_1);
     materials.pillow_2.fragmentShader = getFragment(textureParameters.pillow_2);
     materials.lateral.fragmentShader = getFragment(textureParameters.lateral);
@@ -368,14 +364,14 @@ function computePrice(){
     return price;
 }
 
-/* 
+/*
     Even listener for each select element in the HTML.
     The selection passes, as value, the new name of the selected texture.
     The selection updates the texture in textureParameters and then calls
-    the texture loader. The price is updated respectively. 
+    the texture loader. The price is updated respectively.
 
-    The render calls updateMaterials() and updateUniforms() so the shaders 
-    and their uniforms are updated consequently. 
+    The render calls updateMaterials() and updateUniforms() so the shaders
+    and their uniforms are updated consequently.
 */
 document.querySelectorAll('.form-select').forEach(selectElement => {
         document.querySelector("#price").innerHTML = computePrice() + 0.99;
