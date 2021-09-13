@@ -92,10 +92,6 @@
             return 0.5 / (GGXV + GGXL);
         }
 
-        float Fd_Lambert() {
-            return 1.0 / PI;
-        }
-
         vec3 inverseTransformDirection( in vec3 dir, in mat4 matrix ) {
             return normalize( ( vec4( dir, 0.0 ) * matrix ).xyz );
         }
@@ -113,7 +109,7 @@
             float nDotv = max(dot(n, v), 0.000001);
             vec3 worldN = inverseTransformDirection( n, viewMatrix );
             vec3 worldV = cameraPosition - wPosition ;
-            vec3 r = normalize( reflect(-worldV,worldN));
+            vec3 r = normalize(reflect(-worldV,worldN));
 
             metalness = texture2D(metalnessMap, vUv*textureRepeat).rgb;
             metalness = pow(metalness, vec3(2.2));
@@ -140,22 +136,11 @@
                 vec3  F = F_Schlick(lDoth, cdiff);
                 vec3 Fr = (D * V) * F;
 
-                float clearCoatPerceptualRoughness = roughness;
-                clearCoatPerceptualRoughness = clamp(clearCoatPerceptualRoughness, 0.089, 1.0);
-                float clearCoatRoughness = clearCoatPerceptualRoughness * clearCoatPerceptualRoughness;
-
-                // clear coat BRDF
-                float  Dc = D_GGX(nDoth, clearCoatRoughness);
-                float  Vc = V_Kelemen(lDoth);
-                vec3  Fc = F_Schlick(lDoth, cdiff) * 0.5; // clear coat strength
-                vec3  Frc = (Dc * Vc) * Fc;
-
-                vec3 color = Fr * (1.0 - Fc) * (1.0 - Fc) + Frc;
-                color *= clight * nDotl * envLight;
+                vec3 color = Fr * clight * nDotl;
                 totalColor += color;
             }
 
-            gl_FragColor = vec4(pow(totalColor, vec3(1.0/2.2)), 1.0);
+            gl_FragColor = vec4(pow(totalColor * envLight, vec3(1.0/2.2)), 1.0);
         }
     </script>
 
@@ -240,7 +225,7 @@
                 // specular BRDF
                 float D = D_GGX(nDoth, roughness);
                 float V = V_SmithGGXCorrelated(nDotv, nDotl, roughness);
-                vec3  F = F_Schlick(lDoth, 0.16*cspec*cspec);
+                vec3  F = F_Schlick(lDoth, 0.16 * cspec * cspec);
                 vec3 Fr = (D * V) * F;
 
                 // diffuse BRDF
@@ -319,9 +304,6 @@
 
             cdiff = texture2D( diffuseMap, vUv*textureRepeat ).rgb;
             cdiff = pow(cdiff, vec3(2.2));
-
-            vec3 envLight = textureCube( envMap, vec3(-r.x, r.yz)).rgb;
-			envLight = pow( envLight, vec3(2.2));
 
             vec3 totalColor;
             for (int i = 0; i < 8; i++) {
