@@ -516,6 +516,15 @@
 
     <script src="libs/jquery.min.js"></script>  
     <script>
+        /* 
+            On some phones when the selection menu opens the page scrolls down a bit. 
+            Since the scrollbar is disabled and the overflow is hidden, this causes to
+            user to be unable to navigate inside the page. 
+
+            The avoid this problem, on every focus on the selection menus, the page scrolls to top. 
+            This is not perceived if there's no scrolling needed, but solves the problem in case that
+            happens.
+        */
 		function scrollToTop(){
 			setTimeout(() => {
 				window.scrollTo({
@@ -526,25 +535,29 @@
 			}, 1000);
 		}
         
-        function loadHeader(){
-            $("#header").load("header.html")
-        }
-
+        // Displays the spinner
         window.addEventListener('DOMContentLoaded', function(e){
             setTimeout(() => {
                 $(".overlay").remove();
             }, 2000);
         });
 
+        /* 
+            When the canvas is ready appears with a fade In and the
+            spinner overlay is removed
+        */
         $(document).load(function(){
-            $("canvas").hide().fadeIn(1000);
+            $("canvas").hide().fadeIn("slow");
             $(".overlay").remove();
         });
     </script>
     <script type="module" src="./showcase.js"></script> <!-- Three js code-->
+    <!-- Bootstrap and Popperjs scripts-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-    <script>loadHeader()</script>
+    <script>
+        $("#header").load("header.html") // Loading the header from header.html
+    </script>
 
 </body>
 </html>

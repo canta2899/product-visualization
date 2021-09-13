@@ -12,6 +12,7 @@ import './libs/GammaCorrectionShader.js';
 
 let vs, fs_cloth, fs_wood, fs_metal, fs_leather;
 
+// Acquiring vertex and fragment shaders
 vs = document.getElementById("vertex").textContent;
 fs_cloth = document.getElementById("fragment_cloth").textContent;
 fs_wood = document.getElementById("fragment_wood").textContent;
@@ -19,29 +20,32 @@ fs_metal = document.getElementById("fragment_metal").textContent;
 fs_leather = document.getElementById("fragment_leather").textContent;
 
 
+// Initializing scene and camera
 const scene = new THREE.Scene();
 let camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 100);
 camera.position.set(0, 4, 9);
 camera.lookAt(0, 0, 0);
 
-
+// Binding renderer to the existent canvas
 let canvas = document.querySelector("canvas")
 const renderer = new THREE.WebGLRenderer({canvas, antialias: true})
 renderer.setSize(window.innerWidth, window.innerHeight)
+renderer.setPixelRatio(window.devicePixelRatio);
 
-// We decided to use cineon tonemapping 
+// Cineon tonemapping (choice described in the report)
 renderer.toneMapping = THREE.CineonToneMapping;
 
+// Default texture configuration
 
 let textureParameters = {
     pillow_1: "Fabric009",
     pillow_2: "Fabric008",
     lateral: "Fabric008",
-    bottom: "MetalPlates006", // FISSO
-    legs: "Metal032", // FISSO
-    repeatS: 4.0, // FISSO
-    repeatT: 4.0, // FISSO
-    normalScale: 2 // FISSO
+    bottom: "MetalPlates006",
+    legs: "Metal032", // fixed
+    repeatS: 4.0, // fixed
+    repeatT: 4.0, // fixed
+    normalScale: 2 // fixed
 }
 
 let textures = {
@@ -51,9 +55,13 @@ let textures = {
     bottom: {},
     legs: {}
 }
+
 initTextures();
 
 let repeat = new THREE.Vector2(textureParameters.repeatS, textureParameters.repeatT);
+
+
+// Loading the environment map
 
 let loader = new THREE.CubeTextureLoader().setPath('./cubemap/');
 
@@ -69,6 +77,8 @@ textureCube.minFilter = THREE.LinearMipMapLinearFilter;
 let materialExtensions = {
     shaderTextureLOD: true
 };
+
+// Adds the eight lights according to the technique described in the report
 
 let lightParameters = {
     red: 1.0,
@@ -91,6 +101,8 @@ let lightValues = new THREE.Vector3(
     lightParameters.blue * lightParameters.intensity
 );
 
+
+// Uniforms for the shaders
 
 let uniforms = {
     pillow_1: {},
@@ -125,6 +137,8 @@ buildMaterial('lateral');
 buildMaterial('bottom');
 buildMaterial('legs');
 
+// Loads the object and assigns different materials to the meshes
+
 const objLoader = new THREE.OBJLoader()
 objLoader.load(
     'obj/couch.obj',
@@ -156,10 +170,18 @@ objLoader.load(
     }
 )
 
+/* 
+    Orbit controls to inspect the product. Zoom is limited
+    in order to avoid clipping or too much distancing.
+*/
+
 const controls = new THREE.OrbitControls(camera, renderer.domElement)
 controls.enableDamping = true
 controls.minDistance = 5;
 controls.maxDistance = 13;
+
+
+// Event listener for window resizing
 
 window.addEventListener('resize', onWindowResize, false)
 
@@ -169,6 +191,8 @@ function onWindowResize() {
     renderer.setSize(window.innerWidth, window.innerHeight)
     render()
 }
+
+// Rendering functions
 
 function animate() {
     requestAnimationFrame(animate)
@@ -181,9 +205,9 @@ function render() {
     updateMaterials();
     updateUniforms();
     renderer.render(scene, camera)
-    // composer.render();
 }
 
+// Loads a texture from given path
 function loadTexture(file) {
     return new THREE.TextureLoader().load(file, texture => {
         texture.minFilter = THREE.LinearMipMapLinearFilter;
@@ -195,10 +219,13 @@ function loadTexture(file) {
     });
 }
 
+// Calls the texture loader composing the file name according to the choice
 function callLoadTexture(material, textureType){
     return loadTexture("materials/" + material + "/" + material + "_1K_" + textureType + ".png")
 }
 
+
+// Loads textures maps for each avaiable material
 function initTextures() {
     textures.pillow_1.diffuseMap = callLoadTexture(textureParameters.pillow_1, "Color");
     textures.pillow_2.diffuseMap = callLoadTexture(textureParameters.pillow_2, "Color");
@@ -226,6 +253,8 @@ function initTextures() {
     textures.bottom.metalnessMap =  callLoadTexture(textureParameters.bottom, "Metalness");
 }
 
+
+// Builds uniforms for the shader, according to the material type 
 function buildUniform(type) {
     uniforms[type].normalScale = {type: "v2", value: new THREE.Vector2(1, 1)};
     uniforms[type].textureRepeat = {type: "v2", value: repeat};
@@ -241,6 +270,11 @@ function buildUniform(type) {
         uniforms[type].envMap = {type: "t", value: textureCube};
 }
 
+
+/* 
+    Builds the right material (binding it to the proper shader)
+    for the given material type
+*/
 function buildMaterial(type) {
     materials[type] = new THREE.ShaderMaterial({
         uniforms: uniforms[type],
@@ -251,9 +285,12 @@ function buildMaterial(type) {
         materials[type].fragmentShader = fs_metal;
     else if (type === 'bottom')
         materials[type].fragmentShader = fs_metal;
+    
+    // Assigns the proper fragment shader to each one of the selected materials
     updateMaterials();
 }
 
+// Once the texture for the given type is changed, loads the new textures from the file
 function loadNewTexture(type) {
     textures[type].diffuseMap = callLoadTexture(textureParameters[type], "Color");
     if(type !== "bottom"){
@@ -265,6 +302,7 @@ function loadNewTexture(type) {
     render();
 }
 
+// Updates the uniforms for each material according to the selected texture
 function updateUniforms() {
     uniforms.pillow_1.diffuseMap.value = textures.pillow_1.diffuseMap;
     uniforms.pillow_1.specularMap.value = textures.pillow_1.specularMap;
@@ -286,6 +324,7 @@ function updateUniforms() {
     uniforms.bottom.normalMap.value = textures.bottom.normalMap;
 }
 
+// Updates the fragment shader for each material according to the selected texture
 function updateMaterials() {
     materials.pillow_1.fragmentShader = getFragment(textureParameters.pillow_1);
     materials.pillow_2.fragmentShader = getFragment(textureParameters.pillow_2);
@@ -293,6 +332,7 @@ function updateMaterials() {
     materials.bottom.fragmentShader = getFragment(textureParameters.bottom);
 }
 
+// Bind the right fragment shader to the given name
 function getFragment(material) {
     if (material.includes('Fabric'))
         return fs_cloth;
@@ -304,6 +344,7 @@ function getFragment(material) {
         return fs_leather;
 }
 
+// Maps a price for each selection
 let mapPrices = {
     "Fabric009": 209.0,
     "Fabric008": 229.0,
@@ -315,8 +356,10 @@ let mapPrices = {
     "Wood070": 399.0
 };
 
+// Default configuration
 let configuration = ["Fabric009", "Fabric008", "Fabric008", "MetalPlates006"];
 
+// Calculates the price according to the current configuration
 function computePrice(){
     let price = 0.0;
     configuration.forEach((el) => {
@@ -325,6 +368,15 @@ function computePrice(){
     return price;
 }
 
+/* 
+    Even listener for each select element in the HTML.
+    The selection passes, as value, the new name of the selected texture.
+    The selection updates the texture in textureParameters and then calls
+    the texture loader. The price is updated respectively. 
+
+    The render calls updateMaterials() and updateUniforms() so the shaders 
+    and their uniforms are updated consequently. 
+*/
 document.querySelectorAll('.form-select').forEach(selectElement => {
         document.querySelector("#price").innerHTML = computePrice() + 0.99;
         selectElement.addEventListener('change', (event) => {
